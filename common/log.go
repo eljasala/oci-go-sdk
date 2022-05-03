@@ -62,6 +62,17 @@ func setSDKLogger(logger sdkLogger) {
 	loggerLock.Unlock()
 }
 
+//setSDKLogger sets the logger used by the sdk
+func SetSDKLogger(logger sdkLogger) {
+	loggerLock.Lock()
+	defaultLogger = logger
+	loggerLock.Unlock()
+}
+
+func GetSDKLogger() sdkLogger {
+	return defaultLogger
+}
+
 // newSDKLogger creates a defaultSDKLogger
 // Debug logging is turned on/off by the presence of the environment variable "OCI_GO_SDK_DEBUG"
 // The value of the "OCI_GO_SDK_DEBUG" environment variable controls the logging level.
